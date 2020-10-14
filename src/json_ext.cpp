@@ -53,8 +53,8 @@ int JSON_API GetPinYinXPtr(char* jsonStr, int jsonLen, char* pinYin,
   std::string jsonMsg = WcharToChar((wchar_t*)jsonStr);
 
   if (pinYin) {
-    int i = 0;
-    memset(pinYin, 0, pinYinLen * 2);
+    int wPinYinLen = pinYinLen * 2;
+    memset(pinYin, 0, wPinYinLen);
     Json::Reader reader;
     Json::Value jsonVal, jsonCtx, jsonPinYinGroup, jsonPinYin;
     Json::Value def;
@@ -72,7 +72,7 @@ int JSON_API GetPinYinXPtr(char* jsonStr, int jsonLen, char* pinYin,
     std::cout << strPinYin << std::endl;
     memcpy(pinYin, (void*)strPinYin.c_str(), pinYinLen);
     std::wstring pinYinMsg = CharToWchar(strPinYin.c_str());
-    memcpy(pinYin, (void*)pinYinMsg.c_str(), pinYinLen);
+    memcpy(pinYin, (void*)pinYinMsg.c_str(), wPinYinLen);
     return 99;
   }
   return 88;
