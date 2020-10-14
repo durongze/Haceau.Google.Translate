@@ -144,7 +144,8 @@ namespace Haceau.Google.Translate
                 $"https://translate.google.cn/translate_a/single?client=webapp&sl={SourceLanguage}&tl={TargetLanguage}&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=sos&dt=ss&dt=t&dt=gt&source=bh&ssel=0&tsel=0&xid=45662847&kc=1&tk={GetTk(message)}&q={message}",
                 Client);
             string result = web.SendGetRequest();
-            return result.Substring(4, (result.IndexOf("\"", 4 + 1) - 4));
+            return result;
+            // return result.Substring(4, (result.IndexOf("\"", 4 + 1) - 4));
         }
 
         /// <summary>
