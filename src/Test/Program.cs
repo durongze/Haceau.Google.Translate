@@ -29,7 +29,7 @@ namespace Haceau.Gooogle.Translate.Test
         public static string GetPinYinBySentence(string sentence)
         {
             Translation t = new Translation(client);
-            String transResult = t.PinYin(sentence);
+            String transResult = t.Translate(sentence);
             // zhuang
             int wordNum = sentence.Length;
             int wordPinYinLen = 6 * wordNum;
