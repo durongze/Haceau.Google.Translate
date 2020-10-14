@@ -7,7 +7,25 @@ namespace Haceau.Gooogle.Translate.Test
     class Program
     {
         private static readonly HttpClient client = new HttpClient();
-        
+                
+        [DllImport("jsoncpp.dll", CharSet = CharSet.Auto, EntryPoint = "?GetPinYinXPtr@@YAHPADH0H@Z")]
+        private static extern int GetPinYinXPtr(string strJson, int jsonLen, StringBuilder pinYin, int pinYinLen);
+
+        static Regex reUnicode = new Regex(@"\\u([0-9a-fA-F]{4})", RegexOptions.Compiled);
+
+        public static string Decode(string s)
+        {
+            return reUnicode.Replace(s, m =>
+            {
+                short c;
+                if (short.TryParse(m.Groups[1].Value, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out c))
+                {
+                    return " " + (char)c;
+                }
+                return m.Value;
+            });
+        }
+
         public static string GetPinYinBySentence(string sentence)
         {
             Translation t = new Translation(client);
